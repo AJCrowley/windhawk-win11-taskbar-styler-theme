@@ -6,4 +6,4 @@ To use, just open the Settings tab of the Windows 11 Taskbar Styler, press the b
 
 I hope that you enjoy!
 
-![Theme Preview](https://github.com/e04cc83d-70bd-4f97-8482-35fadaefbdb7)
+![Theme Preview](preview.png)
