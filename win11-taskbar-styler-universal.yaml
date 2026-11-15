@@ -1,0 +1,129 @@
+theme: ''
+styleConstants:
+  - DockBackground=<AcrylicBrush TintColor="{ThemeResource SystemChromeAltHighColor}" TintOpacity="0.2" FallbackColor="{ThemeResource SystemChromeLowColor}" />
+  - DockBorder=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.2" />
+  - DockCorner=23
+  - DockBorderWidth=1
+  - DockSysIconSize=20
+  - DockSysTrayWidth=7
+controlStyles:
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid@DockingStates
+    styles:
+      - Tag=horizontal
+      - Tag@DockedLeft=vertical
+      - Tag@DockedRight=vertical
+      - Tag=>taskbarDock
+  - target: Taskbar.TaskbarFrame
+    styles:
+      - Width={{taskbarDock==`vertical`?skip():`Auto`}}
+      - HorizontalAlignment={{taskbarDock==`vertical`?skip():DockNativeAlignment==`Left`?`Left`:`Center`}}
+      - Margin={{taskbarDock==`vertical`?skip():DockNativeAlignment==`Left`?0:250}},0,250,0
+      - ActualWidth=>DockFrameWidth
+  - target: ':root > ScrollViewer > ScrollContentPresenter > Border > Grid'
+    styles:
+      - ActualWidth=>DockContainerWidth
+      - Taskbar.AugmentedEntryPointButton#AugmentedEntryPointButton
+      - Margin={{DockNativeAlignment==`Left`?-DockWidgetsWidth:skip()}},0,0,0
+      - RenderTransform:=<TranslateTransform X="{{DockNativeAlignment==`Left`?DockContainerWidth-DockFrameWidth:skip()}}" />
+  - target: Taskbar.AugmentedEntryPointButton#AugmentedEntryPointButton > Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel
+    styles:
+      - ActualWidth=>DockWidgetsWidth
+      - Margin={{DockNativeAlignment==`Left`?`0,4,0,4`:0}}
+      - Padding={{DockNativeAlignment==`Left`?`6,0,2,0`:skip()}}
+      - Background:={{DockNativeAlignment==`Left`?`$DockBackground`:skip()}}
+      - CornerRadius=$DockCorner
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel
+    styles:
+      - Width=>DockStartWidth
+      - Tag={{taskbarDock==`vertical`?`Center`:DockStartWidth==``?`Center`:DockStartInnerWidth==``?`Center`:DockStartInnerWidth<=0?`Center`:DockStartWidth-DockStartInnerWidth>8?`Left`:`Center`}}
+      - Tag=>DockNativeAlignment
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel > Grid > Border#BackgroundElement, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel > Border#BackgroundElement
+    styles:
+      - ActualWidth=>DockStartInnerWidth
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid
+    styles:
+      - Background:=$DockBackground
+      - BorderBrush:=$DockBorder
+      - BorderThickness=$DockBorderWidth
+      - CornerRadius=$DockCorner
+      - Margin=0,0,0,3
+      - Padding=16,0
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid
+    styles:
+      - Margin=-6,0,-6,0
+      - CornerRadius=$DockCorner
+      - BorderBrush:=<SolidColorBrush Color="{ThemeResource SurfaceStrokeColorDefault}" />
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid > Rectangle#BackgroundFill
+    styles:
+      - Visibility=Collapsed
+  - target: Rectangle#BackgroundStroke
+    styles:
+      - Visibility=Collapsed
+  - target: StackPanel#SystemTrayFrameGrid, Grid#SystemTrayFrameGrid
+    styles:
+      - Background:=$DockBackground
+      - BorderBrush:=$DockBorder
+      - BorderThickness=$DockBorderWidth
+      - CornerRadius=$DockCorner
+      - Margin=8,0,8,3
+      - CornerRadius=$DockCorner
+      - BorderThickness=$DockBorderWidth
+      - BackgroundSizing=InnerBorderEdge
+      - Padding=8,0
+  - target: SystemTray.ChevronIconView
+    styles:
+      - Padding=0
+  - target: SystemTray.NotifyIconView#NotifyItemIcon
+    styles:
+      - Padding=0
+  - target: SystemTray.OmniButton
+    styles:
+      - Padding=0
+  - target: SystemTray.CopilotIcon
+    styles:
+      - Padding=0
+  - target: SystemTray.OmniButton#NotificationCenterButton > Grid > ContentPresenter > ItemsPresenter > StackPanel > ContentPresenter > SystemTray.IconView#SystemTrayIcon > Grid
+    styles:
+      - Padding=4,0,4,0
+  - target: SystemTray.IconView#SystemTrayIcon > Grid#ContainerGrid > ContentPresenter#ContentPresenter > Grid#ContentGrid > SystemTray.TextIconContent > Grid#ContainerGrid
+    styles:
+      - Padding=0
+  - target: SystemTray.StackListView#IconStack > ItemsPresenter > StackPanel > ContentPresenter > SystemTray.IconView#SystemTrayIcon
+    styles:
+      - Padding=0
+  - target: SystemTray.Stack#ShowDesktopStack
+    styles:
+      - Margin=0,-4,-12,-4
+  - target: Taskbar.Gripper#GripperControl
+    styles:
+      - Width=Auto
+      - MinWidth=24
+  - target: Windows.UI.Xaml.Controls.WrapGrid
+    styles:
+      - MaximumRowsOrColumns=$DockSysTrayWidth
+  - target: Border#OverflowFlyoutBackgroundBorder
+    styles:
+      - Background:=$DockBackground
+      - BorderBrush:=$DockBorder
+      - BorderThickness=$DockBorderWidth
+      - CornerRadius=$DockCorner
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid
+    styles:
+      - CornerRadius=$DockCorner
+  - target: Windows.UI.Xaml.Controls.StackPanel#SystemTrayFrameGrid
+    styles:
+      - CornerRadius=$DockCorner
+  - target: SystemTray.ImageIconContent > Grid#ContainerGrid > Image
+    styles:
+      - Width=$DockSysIconSize
+      - Height=$DockSysIconSize
+  - target: SystemTray.ChevronIconView > Grid#ContainerGrid > ContentPresenter#ContentPresenter > Grid#ContentGrid > SystemTray.TextIconContent > Grid#ContainerGrid > SystemTray.AdaptiveTextBlock#Base > TextBlock#InnerTextBlock
+    styles:
+      - Text=
+themeResourceVariables:
+  - ''
+clickThroughTaskbar: 1
+xamlDiagnosticsHandling: alert
+resourceVariables:
+  - variableKey: ''
+    value: ''
