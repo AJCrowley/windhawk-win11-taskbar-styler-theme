@@ -2,7 +2,7 @@ theme: ''
 styleConstants:
   - DockBackground=<AcrylicBrush TintColor="{ThemeResource SystemChromeAltHighColor}" TintOpacity="0.2" FallbackColor="{ThemeResource SystemChromeLowColor}" />
   - DockBorder=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.2" />
-  - DockCorner=23
+  - DockCorner=20
   - DockBorderWidth=1
   - DockSysIconSize=20
   - DockSysTrayWidth=7
